@@ -56,32 +56,34 @@ export default function FuriganaInput() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className="relative"
+        className="relative bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6"
       >
         <div
           ref={editorRef}
           contentEditable="true"
           onInput={handleInput}
           onPaste={handlePaste}
-          className="editor"
+          className="editor min-h-[120px] text-xl"
           data-placeholder="漢字を入力してください"
         />
-        <div className="absolute top-0 left-0 w-full h-full pointer-events-none p-4">
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none p-6">
           <AnimatePresence>
             {characters.map((char, index) => (
-              <motion.span
+              <motion.ruby
                 key={`${index}-${char.surface}`}
-                className="ruby-wrapper inline-block mx-[1px]"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.2 }}
+                className="inline-block mx-[0.5px] relative"
+                initial={{ opacity: 0, y: 2 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -2 }}
+                transition={{ duration: 0.15, delay: index * 0.02 }}
               >
                 {char.surface}
                 {char.furigana && (
-                  <span className="ruby-text text-xs text-blue-500/75">{char.furigana}</span>
+                  <rt className="text-xs text-blue-500/75 font-normal absolute -top-4 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                    {char.furigana}
+                  </rt>
                 )}
-              </motion.span>
+              </motion.ruby>
             ))}
           </AnimatePresence>
         </div>
