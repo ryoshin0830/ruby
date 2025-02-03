@@ -1,0 +1,5 @@
+{
+  "env": {
+    "YAHOO_API_KEY": "@yahoo_api_key"
+  }
+}
