@@ -4,6 +4,14 @@ const nextConfig = {
   swcMinify: true,
   env: {
     YAHOO_API_KEY: process.env.YAHOO_API_KEY
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/api/furigana',
+        destination: '/api/furigana'
+      }
+    ]
   }
 }
 
