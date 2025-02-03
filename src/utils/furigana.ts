@@ -17,7 +17,7 @@ export async function getFurigana(text: string): Promise<string> {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'User-Agent': `Yahoo AppID: ${process.env.YAHOO_API_KEY}`
+      'User-Agent': `Yahoo AppID: ${process.env.NEXT_PUBLIC_YAHOO_API_KEY}`
     },
     body: JSON.stringify({
       id: "1234-1",
