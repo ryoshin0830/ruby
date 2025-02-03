@@ -8,7 +8,7 @@ export interface FuriganaResponse {
 }
 
 export async function getFurigana(text: string): Promise<string> {
-  if (!text || text.isspace?.()) {
+  if (!text || text.trim() === '') {
     return text;
   }
 
