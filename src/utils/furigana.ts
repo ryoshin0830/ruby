@@ -1,4 +1,4 @@
-interface FuriganaResponse {
+export interface FuriganaResponse {
   result: {
     word: Array<{
       surface: string;
