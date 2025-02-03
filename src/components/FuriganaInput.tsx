@@ -1,7 +1,8 @@
 'use client';
 
+import React from 'react';
 import { useState, useCallback } from 'react';
-import { getFurigana } from '@/utils/furigana';
+import { getFurigana } from '../utils/furigana';
 
 export default function FuriganaInput() {
   const [text, setText] = useState('');
