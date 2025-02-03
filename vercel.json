@@ -1,5 +1,4 @@
 {
-  "env": {
-    "YAHOO_API_KEY": "@yahoo_api_key"
-  }
+  "buildCommand": "next build",
+  "outputDirectory": ".next"
 }
