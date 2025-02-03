@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   env: {
-    NEXT_PUBLIC_YAHOO_API_KEY: process.env.NEXT_PUBLIC_YAHOO_API_KEY
+    YAHOO_API_KEY: process.env.YAHOO_API_KEY
   }
 }
 
