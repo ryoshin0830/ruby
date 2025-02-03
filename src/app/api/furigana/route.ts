@@ -1,16 +1,27 @@
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
-  const origin = request.headers.get('origin') || '*';
+  const allowedOrigins = [
+    'https://ruby-rho.vercel.app',
+    'https://ruby-77tq0n06w-fyuneru0830s-projects.vercel.app',
+    'https://ruby-fyuneru0830s-projects.vercel.app',
+    'http://localhost:3000'
+  ];
+  const origin = request.headers.get('origin');
+  const allowedOrigin = origin && allowedOrigins.includes(origin) ? origin : null;
+
+  if (!allowedOrigin) {
+    return new NextResponse(null, { status: 403 });
+  }
 
   if (request.method === 'OPTIONS') {
     return new NextResponse(null, {
       status: 200,
       headers: {
-        'Access-Control-Allow-Origin': origin,
+        'Access-Control-Allow-Origin': allowedOrigin,
         'Access-Control-Allow-Methods': 'POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Credentials': 'true'
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        'Access-Control-Max-Age': '86400'
       }
     });
   }
@@ -40,8 +51,9 @@ export async function POST(request: Request) {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': origin,
-        'Access-Control-Allow-Credentials': 'true'
+        'Access-Control-Allow-Origin': allowedOrigin,
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        'Access-Control-Max-Age': '86400'
       }
     });
   } catch (error) {
@@ -52,8 +64,9 @@ export async function POST(request: Request) {
         status: 500,
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': origin,
-          'Access-Control-Allow-Credentials': 'true'
+          'Access-Control-Allow-Origin': allowedOrigin,
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+          'Access-Control-Max-Age': '86400'
         }
       }
     );
