@@ -9,7 +9,7 @@ export interface FuriganaResponse {
 
 export async function getFurigana(text: string): Promise<string> {
   if (!text || text.trim() === '') {
-    return text;
+    return JSON.stringify({ result: { word: [] } });
   }
 
   try {
@@ -27,12 +27,10 @@ export async function getFurigana(text: string): Promise<string> {
       throw new Error('Failed to fetch furigana');
     }
 
-    const data: FuriganaResponse = await response.json();
-    return data.result.word.map(w => 
-      w.furigana ? `<ruby>${w.surface}<rt>${w.furigana}</rt></ruby>` : w.surface
-    ).join('');
+    const data = await response.json();
+    return JSON.stringify(data);
   } catch (error) {
     console.error('Error processing furigana:', error);
-    return text;
+    return JSON.stringify({ result: { word: [] } });
   }
 }
